@@ -25,9 +25,9 @@ instXASession = win32com.client.DispatchWithEvents("XA_Session.XASession", ebest
 instXASession.DisconnectServer()
 
 # 로그인 정보
-id = "ghkd7620"
-passwd = "js1016#@"
-cert_passwd = "js101600?!"
+id = ""
+passwd = ""
+cert_passwd = ""
 
 # 로그인 서비 및 로그인
 instXASession.ConnectServer("hts.ebestsec.co.kr", 20001)
