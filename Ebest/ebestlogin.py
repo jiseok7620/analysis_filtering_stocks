@@ -6,9 +6,9 @@ class Login_Ebest:
         print('여기')
         
         # id, password, 공인인증서패스워드 지정
-        id = "ghkd7620"
-        passwd = "js1016@#"
-        cert_passwd = "js101600?!"
+        id = ""
+        passwd = ""
+        cert_passwd = ""
         
         # xingAPI와 COM으로 통신할 이벤트 클래스를 연결해주는작업을 하게됨 
         # => Login_Ebest 클래스에서 정보를 요청하면 이베스트서버에서 응답한 정보를 XASessionEvents 클래스에서 받음
