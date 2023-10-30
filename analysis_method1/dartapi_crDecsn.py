@@ -1,0 +1,42 @@
+import pandas as pd
+import os
+import numpy as np
+import datetime
+import requests # pip install requests
+
+class dartapi_crDecsn_cls():
+    def exe_cr(self, api_key, corpcode, bgn_de, end_de):
+        ## 감자 결정
+        url_json = 'https://opendart.fss.or.kr/api/crDecsn.json'
+        url_xml = 'https://opendart.fss.or.kr/api/crDecsn.xml'
+        
+        # bgn_de : 시작일, end_de : 종료일
+        params ={
+            'crtfc_key' : api_key,
+            'corp_code' : corpcode,
+            'bgn_de' : bgn_de,
+            'end_de' : end_de,
+            }
+        
+        # json 형식으로 가져와서 리스트로 추출
+        response = requests.get(url_json, params=params)
+        data = response.json()
+        
+        # 데이터프레임으로 변형
+        data_list = data.get('list')
+        df_list = pd.DataFrame(data_list)
+        print('개수 : ', len(df_list))
+        #print(df_list.iloc[0])
+        
+        # crstk_ostk_cnt : 보통주식 감자 수, crstk_estk_cnt : 기타주식 감자 수, crsc_nstklstprd : 신주 상장일
+        # bfcr_tisstk_ostk : 감자 전 주식수, atcr_tisstk_ostk : 감자 후 주식수
+        # cr_mth : 감자방법, cr_rs : 감자사유
+        print(df_list[['crstk_ostk_cnt','crstk_estk_cnt','crsc_nstklstprd',
+                       'bfcr_tisstk_ostk', 'atcr_tisstk_ostk', 'cr_mth', 'cr_rs'
+                       ]].iloc[0])
+        
+        # 결과값 리턴하기
+        #return result
+        
+conn = dartapi_crDecsn_cls()
+conn.exe_cr('471e09c05ab83538cdb861f334fec507d3068573','00138792', '20150101', '20211221')
